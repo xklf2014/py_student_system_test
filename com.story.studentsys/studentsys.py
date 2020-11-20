@@ -202,11 +202,33 @@ def sort():
 
 
 def count():
-    pass
+    if os.path.exists(file_name):
+        with open(file_name,'r',encoding='utf-8') as rfile:
+            students = rfile.readlines()
+            if students:
+                print(f'一共存在{len(students)}名学生')
+            else:
+                print('还没有录入学生信息')
+    else:
+        print("系统暂未存在该数据")
 
 
 def total():
-    pass
+    stu_list=[]
+    if os.path.exists(file_name):
+        with open(file_name,'r',encoding='utf-8') as rfile:
+            students=rfile.readlines()
+            if students:
+                for item in students:
+                    stu=dict(eval(item))
+                    stu_list.append(stu)
+
+                show(stu_list)
+            else:
+                print('学生信息为空')
+                return
+    else:
+        print('暂未保存学生信息')
 
 
 # 保存学生列表
