@@ -198,7 +198,52 @@ def update():
 
 
 def sort():
-    pass
+    total()
+
+    if os.path.exists(file_name):
+        with open(file_name,'r',encoding='utf-8') as rfile:
+            students=rfile.readlines()
+
+        stu_list=[]
+        for item in students:
+            stu=dict(eval(item))
+            stu_list.append(stu)
+
+        asc_or_desc_bool = False #排序初始化
+        asc_or_desc=input('请选择(0为升序，1为降序')
+        while True:
+            if asc_or_desc == '0':
+
+                break
+            elif asc_or_desc == '1':
+                asc_or_desc_bool = True
+                break
+            else:
+                print('请输入0或者1')
+
+        model=input('请选择排序方式(1.按照英语成绩排序 2.按照python成绩排序 3.按照java成绩排序 0.按照总成绩排序):')
+        while True:
+            if model == '1':
+                stu_list.sort(key=lambda x:int(x['english']),reverse=asc_or_desc_bool)
+                break
+            elif model =='2':
+                stu_list.sort(key=lambda x:int(x['python']),reverse=asc_or_desc_bool)
+                break
+            elif model == '3':
+                stu_list.sort(key=lambda x:int(x['java']),reverse=asc_or_desc_bool)
+                break
+            elif model == '0':
+                stu_list.sort(key=lambda x: int(x['english'])+int(x['python'])+int(x['java']), reverse=asc_or_desc_bool)
+                break
+            else:
+                print('您输入的内容有误，请重新输入')
+
+        #显示排序后的结果
+        show(stu_list)
+
+
+    else:
+        return
 
 
 def count():
